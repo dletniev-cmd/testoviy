@@ -2,10 +2,7 @@
 <resources>
     <!--
         Тёмная тема, Android 12+ (API 31): то же что в values-v31,
-        но всё чёрное. Параметры windowSplashScreen* идентичны;
-        @drawable/splash_icon разрешается в drawable-night/splash_icon.xml
-        автоматически (там тот же AVD, только fillColor у логотипа
-        — белый).
+        но чёрный фон. Тот же фикс fillAlpha.
     -->
     <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">@android:color/black</item>

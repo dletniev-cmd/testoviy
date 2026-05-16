@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Длительность анимации иконки на системном сплэше (Android 12+).
-         Передаётся в windowSplashScreenAnimationDuration. Должна точно
-         совпадать с длительностью fillAlpha-/scale-аниматоров в AVD
-         drawable/splash_icon.xml (500ms) — иначе ОС либо обрежет
-         анимацию по таймеру, либо подержит уже доигравшую иконку
-         лишнее время. -->
-    <integer name="splash_screen_duration">500</integer>
+    <!-- Длительность scale-анимации иконки на системном сплэше (Android 12+).
+         Должна совпадать с duration аниматоров в drawable/splash_icon.xml. -->
+    <integer name="splash_screen_duration">450</integer>
 </resources>

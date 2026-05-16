@@ -3,42 +3,12 @@
     <!--
         Светлая тема, Android 12+ (API 31): системный SplashScreen API.
 
-        Конфигурация полностью повторяет Telegram-Android
-        (TMessagesProj/src/main/res/values-v31/styles.xml,
-        стиль Theme.TMessages.Start):
-
-          • windowSplashScreenAnimatedIcon = @drawable/splash_icon —
-            AnimatedVectorDrawable с GitHub-логотипом (accent #9885E2),
-            плавная enter-анимация (scale 0.85→1.0 + fillAlpha 0→1,
-            500ms, linear_out_slow_in, БЕЗ overshoot);
-          • windowSplashScreenBackground = #FFFFFF — белый фон;
-          • windowSplashScreenAnimationDuration = 500ms — точно
-            совпадает с длительностью аниматоров внутри AVD;
-          • windowSplashScreenIconBackgroundColor НЕ ставим —
-            без него ОС рендерит иконку в большом размере (≈192dp).
-            С этим параметром иконка ужалась бы в круг ≈160dp,
-            что не то что нам нужно;
-          • БОЛЬШЕ В MainActivity.kt НЕТ кода, связанного со сплэшем:
-            ни `installSplashScreen()`, ни `setKeepOnScreenCondition`,
-            ни `setOnExitAnimationListener`. Это сделано после
-            многократных жалоб на «мигания»: AndroidX-shim
-            SplashScreen library + setKeepOnScreenCondition (опрос
-            каждый кадр) на части OEM-ROM конфликтует с нативным
-            Android 12+ API, в результате AVD периодически
-            перезапускается во время удержания сплэша → визуально
-            «мигает». Telegram-Android не вызывает
-            `installSplashScreen()` и сплэшит исключительно через
-            эту styles.xml-конфигурацию — у них миганий нет.
-
-            Без AndroidX-shim'а сплэш сам автоматически висит до
-            момента когда Activity отрисует первый кадр. В нашем
-            случае это первый кадр Flutter — а так как в main.dart
-            мы делаем `await Future.wait([AppState.load,
-            precacheAllSvgs])` ДО `runApp`, то к моменту первого
-            кадра все данные и SVG-иконки уже прогреты в кэш.
-            Сплэш-экран дисмиссится со встроенной системной
-            exit-анимацией (короткий fade + лёгкий scale), и
-            под ним сразу видно полностью готовый первый экран.
+        windowSplashScreenAnimatedIcon = @drawable/splash_icon —
+        AVD с GitHub-логотипом (accent #9885E2). Анимация: только scale
+        0.85→1.0 за 450ms. fillAlpha НЕ анимируется (был убран) — это
+        фикс бага «маленькая иконка → большая»: раньше первый кадр был
+        пустым (alpha=0), часть OEM-ROM-ов показывала ic_launcher-fallback.
+        Теперь иконка видна с кадра 0, плавно «надувается» в scale.
     -->
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <item name="android:windowBackground">@android:color/white</item>
