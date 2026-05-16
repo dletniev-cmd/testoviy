@@ -15,6 +15,8 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowSplashScreenBackground">#000000</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
+        <!-- См. values-v31/styles.xml — длительность AVD-анимации иконки. -->
+        <item name="android:windowSplashScreenAnimationDuration">700</item>
     </style>
     <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
         <item name="android:windowBackground">?android:colorBackground</item>
