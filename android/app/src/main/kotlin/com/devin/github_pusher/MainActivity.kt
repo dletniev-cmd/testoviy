@@ -22,9 +22,11 @@ class MainActivity : FlutterActivity() {
     // Конфигурация сплэша полностью лежит в:
     //   • res/values-v31/styles.xml (windowSplashScreen* для светлой темы)
     //   • res/values-night-v31/styles.xml (тёмная тема)
-    //   • res/drawable/splash_icon.xml (AVD для светлой)
-    //   • res/drawable-night/splash_icon.xml (AVD для тёмной)
-    //   • res/values/integers.xml (длительность анимации)
+    //   • res/drawable/splash_icon.xml (статичный vector — один на обе темы)
+    //   • res/values/ic_launcher_background.xml (#161618 — цвет фона
+    //     launcher-иконки И сплэша одновременно, чтобы launcher→splash
+    //     был визуально бесшовным; см. подробный комментарий в
+    //     values-v31/styles.xml).
     //
     // Этот подход 1:1 копирует Telegram-Android (DrKLO/Telegram):
     // их LaunchActivity тоже не вызывает installSplashScreen() — они
